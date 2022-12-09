@@ -1,13 +1,3 @@
-CREATE TABLE IF NOT EXISTS films (
-    id serial PRIMARY KEY,
-	title varchar(64) NOT NULL,
-	year int NOT NULL,
-	company int NOT NULL REFERENCES companies(id),
-	director int NOT NULL REFERENCES directors(id),
-	duration int NOT NULL,
-	rating NUMERIC(3,1) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS actors (
     id serial PRIMARY KEY,
 	gender varchar(6) NOT NULL,
@@ -47,6 +37,16 @@ CREATE TABLE IF NOT EXISTS genres (
 	description TEXT
 );
 
+CREATE TABLE IF NOT EXISTS films (
+    id serial PRIMARY KEY,
+	title varchar(64) NOT NULL,
+	year int NOT NULL,
+	company int NOT NULL REFERENCES companies(id),
+	director int NOT NULL REFERENCES directors(id),
+	duration int NOT NULL,
+	rating NUMERIC(3,1) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS films_genres (
     film_id int NOT NULL REFERENCES films(id),
 	genre_id int NOT NULL REFERENCES genres(id)
@@ -56,5 +56,10 @@ CREATE TABLE IF NOT EXISTS films_genres (
 CREATE TABLE IF NOT EXISTS films_actors (
 	film_id int NOT NULL REFERENCES films(id),
 	actor_id int NOT NULL REFERENCES actors(id)
+);
+
+CREATE TABLE IF NOT EXISTS films_screenwriters (
+	film_id int NOT NULL REFERENCES films(id),
+	screenwriter_id int NOT NULL REFERENCES screenwriters(id)
 );
 

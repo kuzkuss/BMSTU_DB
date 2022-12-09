@@ -1,11 +1,8 @@
 ALTER TABLE films ADD CONSTRAINT films_constraint
-CHECK (company >= 1 AND company <= 1000 AND
-    director >= 1 AND director <= 1000 AND
-    year > 0 AND
+CHECK (year > 0 AND
     duration > 0 AND
     rating >= 1 AND rating <= 10
 );
-
 
 ALTER TABLE directors ADD CONSTRAINT directors_constraint
 CHECK (gender like 'male' or gender like 'female');

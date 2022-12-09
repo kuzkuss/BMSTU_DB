@@ -47,7 +47,7 @@ def generate_films():
 
         rating = round(uniform(1.0, 10.0), 1)
 
-        line = "{0},{1},{2},{3},{4},{5}\n".format(title, year, company, director, duration, rating)
+        line = "{0};{1};{2};{3};{4};{5}\n".format(title, year, company, director, duration, rating)
         file.write(line)
     
     file.close()
@@ -71,7 +71,7 @@ def generate_directors():
 
         death_date = str(faker.date_between_dates(birth_date, date.today())) if birth_date.year < 1922 else ""
 
-        line = "{0},{1},{2},{3}\n".format(gender, name, str(birth_date), death_date)
+        line = "{0};{1};{2};{3}\n".format(gender, name, str(birth_date), death_date)
         file.write(line)
     
     file.close()
@@ -95,7 +95,7 @@ def generate_actors():
 
         death_date = str(faker.date_between_dates(birth_date, date.today())) if birth_date.year < 1922 else ""
 
-        line = "{0},{1},{2},{3}\n".format(gender, name, str(birth_date), death_date)
+        line = "{0};{1};{2};{3}\n".format(gender, name, str(birth_date), death_date)
         file.write(line)
     
     file.close()
@@ -118,7 +118,7 @@ def generate_screenwriters():
 
         birth_date = faker.date_of_birth(minimum_age = 25, maximum_age=150)
 
-        line = "{0},{1},{2},{3}\n".format(gender, name, str(birth_date), genre)
+        line = "{0};{1};{2};{3}\n".format(gender, name, str(birth_date), genre)
         file.write(line)
     
     file.close()
@@ -156,7 +156,7 @@ def generate_genres():
 
         description = faker.paragraph(variable_nb_sentences=False)
 
-        line = "{0},{1}\n".format(name, description)
+        line = "{0};{1}\n".format(name, description)
         file.write(line)
     
     file.close()
@@ -171,7 +171,7 @@ def generate_films_genres():
         count_genres = randint(1, 4)
         for _ in range(count_genres):
             genre_id = randint(1, len(GENRES))
-            line = "{0},{1}\n".format(film_id + 1, genre_id)
+            line = "{0};{1}\n".format(film_id + 1, genre_id)
             file.write(line)
     
     file.close()
@@ -186,12 +186,12 @@ def generate_films_actors():
         count_actors = randint(10, 150)
         for _ in range(count_actors):
             actor_id = randint(1, COUNT_RECORDS)
-            line = "{0},{1}\n".format(film_id + 1, actor_id)
+            line = "{0};{1}\n".format(film_id + 1, actor_id)
             file.write(line)
     
     file.close()
 
-    print("Table of films and actors created\n")
+    print("Table of films and actors created")
 
 def generate_films_screenwriters():
 
@@ -201,7 +201,7 @@ def generate_films_screenwriters():
         count_screenwriters = randint(2, 20)
         for _ in range(count_screenwriters):
             screenwriter_id = randint(1, COUNT_RECORDS)
-            line = "{0},{1}\n".format(film_id + 1, screenwriter_id)
+            line = "{0};{1}\n".format(film_id + 1, screenwriter_id)
             file.write(line)
     
     file.close()
@@ -209,12 +209,12 @@ def generate_films_screenwriters():
     print("Table of films and screenwriters created\n")
 
 if __name__ == "__main__":
-    # generate_films()
-    # generate_directors()
-    # generate_actors()
-    # generate_companies()
-    # generate_genres()
-    # generate_films_genres()
-    # generate_films_actors()
+    generate_films()
+    generate_directors()
+    generate_actors()
+    generate_companies()
+    generate_genres()
+    generate_films_genres()
+    generate_films_actors()
     generate_screenwriters()
     generate_films_screenwriters()
