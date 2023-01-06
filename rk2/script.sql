@@ -110,11 +110,13 @@ INSERT INTO customer_executor(customer_id, executor_id) VALUES (9, 8);
 
 
 --Задание 2
+
+-- Получить имя и год рождения покупателей которые родились позже 2000 года
 SELECT full_name, year_birth
 FROM customer
 WHERE year_birth>2000;
 
-
+-- Получить название работы, имя исполнителя и средний год рождения исполнителей у этой работы
 SELECT name_job, full_name,
 	   avg(year_birth) over(PARTITION BY j.id)
 FROM executor e
@@ -122,7 +124,7 @@ JOIN jobs_types_executor j_e ON j_e.executor_id=e.id
 JOIN jobs_types j ON j_e.job_type_id=j.id;
 
 
-
+-- Получить id покупателя, id исполнителя и опыт исполнителя, где опыт исполнителя больше 1
 SELECT c.id AS customer, c_e_join.id AS executor, c_e_join.experience AS executor_experience
 FROM (SELECT * FROM executor e
 	   JOIN customer_executor c_e ON e.id=c_e.executor_id
